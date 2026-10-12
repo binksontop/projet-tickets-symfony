@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statut du ticket n° {{ ticket.id }} – Support de l'agence{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 card-title">Modifier le statut du ticket n° {{ ticket.id }}</h1>
+                <p class="text-muted">État actuel : <strong>{{ ticket.etat }}</strong></p>
+
+                {{ form_start(form) }}
+                    {{ form_row(form.etat) }}
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <a href="{{ path('app_ticket_show', {id: ticket.id}) }}" class="btn btn-outline-secondary">Annuler</a>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

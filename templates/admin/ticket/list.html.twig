@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tickets (administration) – Support de l'agence{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">Administration des tickets</h1>
+    <a href="{{ path('app_admin_ticket_new') }}" class="btn btn-primary">Nouveau ticket</a>
+</div>
+
+<table class="table table-hover bg-white shadow-sm">
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>Client</th>
+            <th>Catégorie</th>
+            <th>État</th>
+            <th>Responsable</th>
+            <th>Ouvert le</th>
+            <th>Clôturé le</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.id }}</td>
+                <td>{{ ticket.auteur }}</td>
+                <td>{{ ticket.categorie }}</td>
+                <td><span class="badge bg-secondary">{{ ticket.etat }}</span></td>
+                <td>{{ ticket.responsable ?? '—' }}</td>
+                <td>{{ ticket.dateOuverture|date('d/m/Y') }}</td>
+                <td>{{ ticket.dateCloture ? ticket.dateCloture|date('d/m/Y') : '—' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_ticket_edit', {id: ticket.id}) }}" class="btn btn-sm btn-outline-primary">Modifier</a>
+                    <a href="{{ path('app_ticket_show', {id: ticket.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="8" class="text-center text-muted">Aucun ticket pour le moment.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

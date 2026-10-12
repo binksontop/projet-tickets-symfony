@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tickets – Support de l'agence{% endblock %}
+
+{% block body %}
+<h1 class="h4 mb-3">Les tickets</h1>
+
+<table class="table table-hover bg-white shadow-sm">
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Catégorie</th>
+            <th>État</th>
+            <th>Responsable</th>
+            <th>Ouvert le</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.id }}</td>
+                <td>{{ ticket.auteur }}</td>
+                <td>{{ ticket.description|length > 40 ? ticket.description|slice(0, 40) ~ '…' : ticket.description }}</td>
+                <td>{{ ticket.categorie }}</td>
+                <td>
+                    {# couleur du badge selon l'etat du ticket #}
+                    <span class="badge {% if ticket.etat.libelle == 'Nouveau' %}bg-primary{% elseif ticket.etat.libelle == 'Ouvert' %}bg-warning text-dark{% elseif ticket.etat.libelle == 'Résolu' %}bg-success{% else %}bg-secondary{% endif %}">
+                        {{ ticket.etat }}
+                    </span>
+                </td>
+                <td>{{ ticket.responsable ?? '—' }}</td>
+                <td>{{ ticket.dateOuverture|date('d/m/Y H:i') }}</td>
+                <td>
+                    <a href="{{ path('app_ticket_show', {id: ticket.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+                    <a href="{{ path('app_ticket_statut', {id: ticket.id}) }}" class="btn btn-sm btn-outline-primary">Statut</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="8" class="text-center text-muted">Aucun ticket pour le moment.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

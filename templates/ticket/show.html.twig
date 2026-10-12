@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket n° {{ ticket.id }} – Support de l'agence{% endblock %}
+
+{% block body %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="h4 card-title">Ticket n° {{ ticket.id }}
+            <span class="badge bg-secondary ms-2">{{ ticket.etat }}</span>
+        </h1>
+
+        <table class="table table-sm">
+            <tbody>
+                <tr><th style="width:180px">Client</th><td>{{ ticket.auteur }}</td></tr>
+                <tr><th>Catégorie</th><td>{{ ticket.categorie }}</td></tr>
+                <tr><th>Responsable</th><td>{{ ticket.responsable ?? 'Non assigné' }}</td></tr>
+                <tr><th>Ouvert le</th><td>{{ ticket.dateOuverture|date('d/m/Y à H:i') }}</td></tr>
+                <tr><th>Clôturé le</th><td>{{ ticket.dateCloture ? ticket.dateCloture|date('d/m/Y à H:i') : '—' }}</td></tr>
+                <tr><th>Description</th><td>{{ ticket.description|nl2br }}</td></tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_tickets') }}" class="btn btn-outline-secondary">Retour à la liste</a>
+        <a href="{{ path('app_ticket_statut', {id: ticket.id}) }}" class="btn btn-primary">Modifier le statut</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_admin_ticket_edit', {id: ticket.id}) }}" class="btn btn-warning">Modifier (admin)</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

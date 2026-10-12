@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil – Support de l'agence{% endblock %}
+
+{% block body %}
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 card-title">Signaler un problème</h1>
+                <p class="text-muted">Décrivez votre problème, notre équipe se charge du reste.</p>
+
+                {{ form_start(form) }}
+                    {{ form_row(form.auteur) }}
+                    {{ form_row(form.description) }}
+                    {{ form_row(form.categorie) }}
+                    <button type="submit" class="btn btn-primary">Envoyer le ticket</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Vous faites partie de l'équipe ?</h2>
+                <p class="text-muted">Connectez-vous pour accéder à la liste des tickets et à l'administration.</p>
+                <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Connexion</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

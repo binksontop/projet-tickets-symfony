@@ -36,7 +36,6 @@ class AdminController extends AbstractController
         return $this->render('admin/referentiel/index.html.twig', [
             'titre' => 'Les états',
             'entites' => $etats,
-            'champ' => 'libelle',
             'nomRoute' => 'app_admin_etats',
         ]);
     }
@@ -77,7 +76,6 @@ class AdminController extends AbstractController
         return $this->render('admin/referentiel/index.html.twig', [
             'titre' => 'Les catégories',
             'entites' => $categories,
-            'champ' => 'libelle',
             'nomRoute' => 'app_admin_categories',
         ]);
     }
@@ -118,7 +116,6 @@ class AdminController extends AbstractController
         return $this->render('admin/referentiel/index.html.twig', [
             'titre' => 'Les responsables',
             'entites' => $responsables,
-            'champ' => 'nom',
             'nomRoute' => 'app_admin_responsables',
         ]);
     }
