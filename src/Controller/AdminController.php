@@ -40,7 +40,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/etats/nouveau', name: 'app_admin_etat_new')]
+    #[Route('/etats/nouveau', name: 'app_admin_etats_new')]
     public function etatNew(Request $request, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(EtatType::class, new Etat(), $request, $entityManager,
@@ -48,7 +48,7 @@ class AdminController extends AbstractController
             "L'état a bien été créé.", "Nouvel état");
     }
 
-    #[Route('/etats/{id}/modifier', name: 'app_admin_etat_edit', requirements: ['id' => '\d+'])]
+    #[Route('/etats/{id}/modifier', name: 'app_admin_etats_edit', requirements: ['id' => '\d+'])]
     public function etatEdit(Request $request, Etat $etat, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(EtatType::class, $etat, $request, $entityManager,
@@ -56,7 +56,7 @@ class AdminController extends AbstractController
             "L'état a bien été modifié.", "Modifier l'état");
     }
 
-    #[Route('/etats/{id}/supprimer', name: 'app_admin_etat_delete', requirements: ['id' => '\d+'])]
+    #[Route('/etats/{id}/supprimer', name: 'app_admin_etats_delete', requirements: ['id' => '\d+'])]
     public function etatDelete(Request $request, Etat $etat, EntityManagerInterface $entityManager): Response
     {
         $this->supprimerReferentiel($request, $etat, $entityManager, "L'état a bien été supprimé.");
@@ -80,7 +80,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/categories/nouveau', name: 'app_admin_categorie_new')]
+    #[Route('/categories/nouveau', name: 'app_admin_categories_new')]
     public function categorieNew(Request $request, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(CategorieType::class, new Categorie(), $request, $entityManager,
@@ -88,7 +88,7 @@ class AdminController extends AbstractController
             'La catégorie a bien été créée.', 'Nouvelle catégorie');
     }
 
-    #[Route('/categories/{id}/modifier', name: 'app_admin_categorie_edit', requirements: ['id' => '\d+'])]
+    #[Route('/categories/{id}/modifier', name: 'app_admin_categories_edit', requirements: ['id' => '\d+'])]
     public function categorieEdit(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(CategorieType::class, $categorie, $request, $entityManager,
@@ -96,7 +96,7 @@ class AdminController extends AbstractController
             'La catégorie a bien été modifiée.', 'Modifier la catégorie');
     }
 
-    #[Route('/categories/{id}/supprimer', name: 'app_admin_categorie_delete', requirements: ['id' => '\d+'])]
+    #[Route('/categories/{id}/supprimer', name: 'app_admin_categories_delete', requirements: ['id' => '\d+'])]
     public function categorieDelete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
     {
         $this->supprimerReferentiel($request, $categorie, $entityManager, 'La catégorie a bien été supprimée.');
@@ -120,7 +120,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/responsables/nouveau', name: 'app_admin_responsable_new')]
+    #[Route('/responsables/nouveau', name: 'app_admin_responsables_new')]
     public function responsableNew(Request $request, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(ResponsableType::class, new Responsable(), $request, $entityManager,
@@ -128,7 +128,7 @@ class AdminController extends AbstractController
             'Le responsable a bien été créé.', 'Nouveau responsable');
     }
 
-    #[Route('/responsables/{id}/modifier', name: 'app_admin_responsable_edit', requirements: ['id' => '\d+'])]
+    #[Route('/responsables/{id}/modifier', name: 'app_admin_responsables_edit', requirements: ['id' => '\d+'])]
     public function responsableEdit(Request $request, Responsable $responsable, EntityManagerInterface $entityManager): Response
     {
         return $this->gererReferentiel(ResponsableType::class, $responsable, $request, $entityManager,
@@ -136,7 +136,7 @@ class AdminController extends AbstractController
             'Le responsable a bien été modifié.', 'Modifier le responsable');
     }
 
-    #[Route('/responsables/{id}/supprimer', name: 'app_admin_responsable_delete', requirements: ['id' => '\d+'])]
+    #[Route('/responsables/{id}/supprimer', name: 'app_admin_responsables_delete', requirements: ['id' => '\d+'])]
     public function responsableDelete(Request $request, Responsable $responsable, EntityManagerInterface $entityManager): Response
     {
         $this->supprimerReferentiel($request, $responsable, $entityManager, 'Le responsable a bien été supprimé.');
