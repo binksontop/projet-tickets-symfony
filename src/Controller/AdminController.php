@@ -56,14 +56,6 @@ class AdminController extends AbstractController
             "L'état a bien été modifié.", "Modifier l'état");
     }
 
-    #[Route('/etats/{id}/supprimer', name: 'app_admin_etats_delete', requirements: ['id' => '\d+'])]
-    public function etatDelete(Request $request, Etat $etat, EntityManagerInterface $entityManager): Response
-    {
-        $this->supprimerReferentiel($request, $etat, $entityManager, "L'état a bien été supprimé.");
-
-        return $this->redirectToRoute('app_admin_etats');
-    }
-
     // ------------------------------------------------------------
     // Gestion des categories
     // ------------------------------------------------------------
@@ -96,14 +88,6 @@ class AdminController extends AbstractController
             'La catégorie a bien été modifiée.', 'Modifier la catégorie');
     }
 
-    #[Route('/categories/{id}/supprimer', name: 'app_admin_categories_delete', requirements: ['id' => '\d+'])]
-    public function categorieDelete(Request $request, Categorie $categorie, EntityManagerInterface $entityManager): Response
-    {
-        $this->supprimerReferentiel($request, $categorie, $entityManager, 'La catégorie a bien été supprimée.');
-
-        return $this->redirectToRoute('app_admin_categories');
-    }
-
     // ------------------------------------------------------------
     // Gestion des responsables
     // ------------------------------------------------------------
@@ -134,14 +118,6 @@ class AdminController extends AbstractController
         return $this->gererReferentiel(ResponsableType::class, $responsable, $request, $entityManager,
             'admin/referentiel/form.html.twig', 'app_admin_responsables',
             'Le responsable a bien été modifié.', 'Modifier le responsable');
-    }
-
-    #[Route('/responsables/{id}/supprimer', name: 'app_admin_responsables_delete', requirements: ['id' => '\d+'])]
-    public function responsableDelete(Request $request, Responsable $responsable, EntityManagerInterface $entityManager): Response
-    {
-        $this->supprimerReferentiel($request, $responsable, $entityManager, 'Le responsable a bien été supprimé.');
-
-        return $this->redirectToRoute('app_admin_responsables');
     }
 
     // ------------------------------------------------------------
@@ -228,17 +204,6 @@ class AdminController extends AbstractController
             'titre' => $titre,
             'routeRetour' => $route,
         ]);
-    }
-
-    // supprime une entite apres verification du jeton CSRF
-    private function supprimerReferentiel(Request $request, $entite, EntityManagerInterface $entityManager,
-        string $message): void
-    {
-        if ($this->isCsrfTokenValid('suppression' . $entite->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($entite);
-            $entityManager->flush();
-            $this->addFlash('success', $message);
-        }
     }
 
     // renseigne la date de cloture quand le ticket passe a l'etat "Fermé"
